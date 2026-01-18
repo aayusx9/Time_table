@@ -1,0 +1,190 @@
+/* Success Monster 4.5 - Responsive Empire */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg-base: #fdfbf7;
+  --glass-surface: rgba(255, 255, 255, 0.75);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.9);
+  --glass-shadow: 0 12px 40px -8px rgba(213, 206, 192, 0.6);
+  --glass-blur: blur(24px);
+
+  --accent-primary: #d946ef;
+  --accent-secondary: #8b5cf6;
+  --green-tea: #84cc16;
+  --danger: #ef4444;
+  --text-main: #27272a;
+  --text-muted: #71717a;
+
+  --radius-xl: 32px;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: linear-gradient(135deg, #fdfbf7 0%, #f4f1ea 100%);
+  color: var(--text-main);
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* App Grid - Desktop Default */
+#app {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  height: 100vh;
+  max-width: 1920px;
+  margin: 0 auto;
+  transition: all 0.3s;
+}
+
+/* Sidebar */
+#sidebar {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+}
+
+/* Header & Mobile Toggle */
+.mobile-header {
+  display: none;
+  /* Hidden on Desktop */
+  padding: 16px 24px;
+  background: var(--glass-surface);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+}
+
+/* Main Workspace */
+#workspace {
+  padding: 40px;
+  overflow-y: auto;
+  position: relative;
+  scrollbar-width: thin;
+}
+
+/* Components */
+.glass-card {
+  background: var(--glass-surface);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+.timeline-card {
+  background: white;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  margin-bottom: 16px;
+  border-left: 4px solid transparent;
+  opacity: 0.7;
+  transition: all 0.3s;
+}
+
+.timeline-card.active {
+  opacity: 1;
+  border-left-color: var(--green-tea);
+  box-shadow: 0 8px 24px rgba(132, 204, 22, 0.15);
+  transform: scale(1.02);
+}
+
+.timer-huge {
+  font-size: 5rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -2px;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--text-main), var(--text-muted));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Mobile Responsive Logic */
+@media (max-width: 768px) {
+  #app {
+    display: block;
+    /* Stack layout */
+    height: auto;
+    min-height: 100vh;
+    padding-top: 70px;
+    /* Space for mobile header */
+  }
+
+  /* Sidebar becomes a drawer */
+  #sidebar {
+    position: fixed;
+    inset: 0;
+    transform: translateX(-100%);
+    background: rgba(255, 255, 255, 0.95);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-top: 80px;
+  }
+
+  #sidebar.open {
+    transform: translateX(0);
+  }
+
+  .mobile-header {
+    display: flex;
+  }
+
+  #workspace {
+    padding: 20px;
+    height: auto;
+    overflow-y: visible;
+  }
+
+  .timer-huge {
+    font-size: 3.5rem;
+  }
+
+  .glass-card {
+    padding: 24px;
+  }
+
+  h1 {
+    font-size: 1.5rem !important;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.animate-in {
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
